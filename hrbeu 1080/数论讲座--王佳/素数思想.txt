@@ -1,0 +1,41 @@
+#include<stdio.h>
+
+判断一个很大的数是不是素数：
+ 例如：n是1000000，往往判断n能否整除0--sqrt(n)的数，这样比较麻烦，很有可能超时。我们可以再将0--sqrt(n)的数缩小化。只考虑里面的所有素数，即将0--sqrt(n)的数里面的所有素数存放到一个数组中，再进行判断。
+
+
+
+
+
+
+
+
+#include<stdlib.h>
+#include<math.h>
+int main()
+{
+	long n;
+	long m,i,j,flag,t=0;
+	long a[1000];
+    while(scanf("%lld",&n)){
+	m=sqrt(n);
+    for(j=2;j<m+1;j++)
+    {
+	    for(i=2;i<sqrt(j)+1;i++)
+		{
+			if(j%i==0) break;
+		}
+		if(i==sqrt(j)+1) 
+		{
+			a[t++]=j;
+			flag=t;
+			printf("%ld\n",j);
+		}
+	}
+	for(t=1;a[t]!=0;t++)
+		if(m%a[t]==0) break;
+    if(t==flag) printf("m is a primer\n");
+    else printf("m is not a primer\n");}
+    system("pause");
+    return 0;
+}

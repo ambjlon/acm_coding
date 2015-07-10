@@ -1,0 +1,56 @@
+#include <iostream>
+#include <queue>
+#define MAX 102
+using namespace std;
+int edges[MAX][MAX];
+int n,start;
+bool mark,used[MAX];
+void Init()
+{
+    int i,a,b,j;
+    for(i=1;i<MAX;i++)
+        for(j=1;j<MAX;j++)
+            edges[i][j]=-1;
+    for(i=0;i<n;i++)
+    {
+        scanf("%d%d",&a,&b);
+        if(a!=b)
+            edges[a][b]=1;
+    }
+}
+void DFS(int start)
+{
+    int i;
+    if(used[start])
+    {
+        mark=true;
+        return;
+    }
+    used[start]=true;
+    for(i=1;i<MAX;i++)
+    {
+        if(edges[start][i]==1)
+        {
+            DFS(i);
+        }
+    }
+    used[start]=false;
+}
+int main()
+{
+    int i;
+    while(scanf("%d",&n)!=EOF&&n>=0)
+    {
+        Init();
+        scanf("%d",&start);
+        mark=false;
+        for(i=1;i<MAX;i++)
+            used[i]=false;
+        DFS(start);
+        if(!mark)
+            printf("Yes\n");
+        else
+            printf("No\n");
+    }
+    return 0;
+}

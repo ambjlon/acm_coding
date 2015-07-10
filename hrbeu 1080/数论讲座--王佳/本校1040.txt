@@ -1,0 +1,64 @@
+Binomial Showdown 
+TimeLimit : 1 Second   Memorylimit : 32 Megabyte 
+Totalsubmit : 655  Accepted : 98
+
+
+In how many ways can you choose k elements out of n elements, not taking order into account? 
+
+Write a program to compute this number. 
+
+Input
+
+The input will contain one or more test cases. 
+
+Each test case consists of one line containing two integers n (n >= 1) and k (0 <= k <= n). 
+
+Input is terminated by two zeroes for n and k. 
+
+
+Output
+
+For each test case, print one line containing the required number. This number will always fit into an integer, i.e. it will be less than 2^31. 
+
+
+Sample Input
+
+4 2
+10 5
+49 6
+0 0
+
+
+Sample Output
+
+6
+252
+13983816
+
+
+code:
+#include<stdio.h>
+#include<iostream.h>
+#include<stdlib.h>
+int main()
+{
+    long long n,k,sum;
+    long long i,j;
+    while(cin>>n>>k && n!=0 )
+    {
+        sum=1;
+        if(n==0 && k==0) break;
+        if(k>n/2) k=n-k;
+        for(i=n-k+1,j=1;i<=n&&j<=k;i++,j++)
+        {
+            sum=sum*i/j;
+        }
+        cout<<sum<<endl;
+    }
+    system("pause");
+    return 0;
+}
+
+
+
+

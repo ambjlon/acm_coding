@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+
+
+int main()
+{
+    int  n=0,k=0;
+    double result;
+    while(cin>>n>>k&&!(n==0&&k==0))
+    {
+        int m=n-k;
+        if (m<k)
+        {
+            int t=k;
+            k=m;
+            m=t;
+        }
+        result=1;
+        for (int i=1,j=n;i<=k;i++,j--)
+            result=result*j/i;
+        cout<<(long int)result<<endl;
+
+        
+    }
+    return 0;
+}
+

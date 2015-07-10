@@ -1,0 +1,41 @@
+yue(int x,int y)
+{
+int max,min,r;
+if (x>y)
+{
+max=x;
+min=y;
+}
+else
+{
+max=y;
+min=x;
+}
+do
+{
+r=max%min;
+max=min;
+min=r;
+}
+while(r!=0);
+return (max);
+}
+
+
+
+
+bei(int x,int y)
+{
+int z;
+z=yue(x,y);
+return((x*y)/z);
+}
+main()
+{
+int a,b,c,d;
+scanf("%d%d",&a,&b);
+c=yue(a,b);
+d=bei(a,b);
+printf("%d,%d",c,d);
+} 
+

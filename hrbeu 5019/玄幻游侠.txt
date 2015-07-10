@@ -1,0 +1,100 @@
+/*5019 Max*/
+#include<iostream>
+using namespace std;
+/*******************************************************/
+int v[101];
+int m[101][101][3];
+char op[101];
+int Poly_Max(int n);
+void MIN_MAX(int n, int i, int s, int j, int &minf, int &maxf);
+/*******************************************************/
+int Poly_Max(int n)
+{
+        int minf, maxf;
+        for(int j=2; j<=n; j++)
+                for(int i=1; i<=n; i++)
+                        for(int s=1; s<j; s++)
+                        {
+                                MIN_MAX(n,i,s,j,minf,maxf);
+                                if(m[i][j][0] > minf)
+                                        m[i][j][0] = minf;
+                                if(m[i][j][1] < maxf)
+                                        m[i][j][1] = maxf;      
+                        }       
+        int temp = m[1][n][1];
+        /*General:
+        for(int i=2; i<=n; i++)
+                if(temp < m[i][n][1])
+                        temp = m[i][n][1];
+        */
+        return temp;
+}
+
+void MIN_MAX(int n, int i, int s, int j, int &minf, int &maxf)
+{
+        int e[4];
+        int a = m[i][s][0],
+                b = m[i][s][1],
+                r = (i+s-1)%n+1,
+                c = m[r][j-s][0],       
+                d = m[r][j-s][1];
+        if(op[r] == '+')
+        {
+                minf = a+c;
+                maxf = b+d;     
+        }
+        else //'*'
+        {
+                e[1] = a*c;
+                e[2] = a*d;
+                e[3] = b*c;
+                e[4] = b*d;
+                minf = e[1];
+                maxf = e[1];    
+                for(int r=2; r<5; r++)
+                {
+                        if(minf > e[r]) 
+                                minf = e[r];
+                        if(maxf < e[r])
+                                maxf = e[r];    
+                }
+        }
+}
+/*******************************************************/
+int main()
+{
+        int N;
+        while(cin >> N)
+        {
+/**************initial**************************/       
+                memset(m,0,sizeof(m));
+                memset(v,0,sizeof(v));
+                memset(op,0,sizeof(op));
+                for(int i=1; i<=N; i++)              
+                for(int j=1; j<=N; j++)
+                {
+                m[i][j][0]=100000000;
+                m[i][j][1]=-100000000;
+                }    
+        
+/**************input****************************/
+                for(int i=1; i<N; i++)
+                {
+                        cin >> v[i];
+                        cin >> op[i+1]; 
+                }       
+                cin >> v[N];
+                
+                for(int i=1; i<=N; i++)
+                {
+                        m[i][1][0] = v[i];
+                        m[i][1][1] = v[i];      
+                }
+/**************run******************************/
+                int res = Poly_Max(N);
+                cout << res << endl;
+        }
+        
+//      system("pause");
+        return 0;       
+}

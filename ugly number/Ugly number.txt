@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+
+int num[1501];
+
+int min(int a,int b,int c)
+{
+	if(c>a) c=a;
+	if(c>b) c=b;
+	return c;
+
+}
+
+void getNumList()
+{
+	int i,j,k;
+	int n;
+	for(n=1;n<=5;++n) 
+		num[n]=n;
+	for(i=3,j=2,k=2;n<=1500;++n) {
+		num[n]=min(num[i]*2,num[j]*3,num[k]*5);
+		while(num[i]*2<=num[n])
+			++i;
+		while(num[j]*3<=num[n])
+			++j;
+		while(num[k]*5<=num[n])
+			++k;	
+	}
+}
+
+int main()
+{
+	getNumList();
+	int n;
+	while(cin>>n && n) {
+		cout<<num[n]<<endl;
+	}	
+	return 0;
+}
+
+本文来自CSDN博客，转载请标明出处：http://blog.csdn.net/killua_hzl/archive/2009/06/03/4238388.aspx
